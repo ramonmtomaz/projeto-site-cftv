@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>CFTV Prevenção de Perdas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="pagina-toda">
+      <div class="header">
+        <header>
+          <h1>CFTV Prevenção de Perdas 2025</h1>
+        </header>
+      </div>
+
+      <nav class="navbar">
+        <ul>
+          <li class="aba-adicionar-pedido"><a href="#">Adicionar Pedido</a></li>
+          <li class="aba-selecionar-pedido"><a href="#">Selecionar Pedido</a></li>
+          <li class="aba-em-andamento"><a href="#">Em Andamento</a></li>
+        </ul>
+      </nav>
+      <!-- ABA DE ADICIONAR PEDIDO -->
+      <div class="container-adicionar-pedido">
+        <section>
+          <h2>Adicionar Pedido</h2>
+          <p>
+            Informe o Pedido</p>
+            <input
+              type="text"
+              class="input-adicionar-pedido"
+              placeholder="Digite aqui"
+            />
+          
+          <div class="container-setor-solicitante">
+            <label for="setor-solicitante">Setor Solicitante</label>
+            <select name="setores" id="setor-solicitante">
+              <option value="">Selecione o Setor</option>
+              <option value="atendimento">Atendimento</option>
+              <option value="expedicao">Expedição</option>
+              <option value="juridico">Jurídico</option>
+              <option value="she">Segurança do Trabalho</option>
+              <option value="cx-magalu">CX Magalu</option>
+              <option value="rma">RMA</option>
+              <option value="recebimento">Recebimento</option>
+              <option value="transporte">Transporte</option>
+              <option value="inventario">Inventário</option>
+              <option value="reclame-aqui">Reclame Aqui</option>
+              <option value="pp-magalu">Prev de Perdas Magalu</option>
+              <option value="qualidade">Qualidade</option>
+              <option value="rh">RH</option>
+              <option value="seguranca">Segurança Patrimonial</option>
+              <option value="manutencao">Manutenção</option>
+            </select>
+          </div>
+
+          <div class="container-reclamacao-cliente">
+            <label for="reclamacao-cliente">Reclamação do Cliente</label>
+            <select name="reclamacao" id="reclamacao-cliente">
+              <option value="">Informe a Reclamação:</option>
+              <option value="avaria">Avaria</option>
+              <option value="falta-de-produto">Falta de Produto</option>
+              <option value="produto-improcedente">Produto Improcedente</option>
+              <option value="troca-pedido">Troca de Pedido</option>
+            </select>
+          </div>
+
+          <div class="container-prioridade">
+            <label for="prioridade-pedido">Prioridade do Pedido</label>
+            <select name="prioridade" id="prioridade-pedido">
+              <option value="">Defina a Prioridade:</option>
+              <option value="urgente">Urgente</option>
+              <option value="alta">Alta</option>
+              <option value="media">Média</option>
+              <option value="baixa">Baixa</option>
+            </select>
+          </div>
+
+          <input
+            type="button"
+            class="botao-adicionar-pedido"
+            value="Adicionar Pedido"
+          />
+        </section>
+      </div>
+
+      <!-- ABA DE SELECAO DE PEDIDO -->
+      <div class="container-selecao-pedido">
+        <section>
+          <h2>Seleciona um pedido</h2>
+          <div class="quantidade-pedidos">
+            <p>Mostrar quantidade de Pedidos</p>
+          </div>
+          <label for="auditores">Quem vai fazer?</label>
+          <select name="auditores" id="auditores">
+            <option value="">Seleciona o seu nome:</option>
+            <option value="jaqueline">Jaqueline</option>
+            <option value="jefferson">jefferson</option>
+            <option value="kamili">Kamili</option>
+            <option value="lucas">Lucas</option>
+            <option value="ramon">Ramon</option>
+            <option value="rodrigo">Rodrigo</option>
+          </select>
+
+          <input type="button" class="selecionar-pedido" value="Selecionar" />
+        </section>
+      </div>
+      <!-- ABA DE PEDIDOS EM ANDAMENTO -->
+      <div class="container-pedido-andamento">
+        <h2>Pedidos em Andamento</h2>
+        <div class="pedidos-andamento">
+          <table>
+            <tr>
+              <th>Email do Pedido</th>
+              <th>Numero do Pedido</th>
+              <th>Auditor</th>
+              <th>Finalizar</th>
+              <th>Excluir</th>
+            </tr>
+            <tr>
+              <td>link</td>
+              <td>12345678</td>
+              <td>Ramon</td>
+              <td>
+                <input type="button" class="botao-finalizar-pedido" value="V" />
+              </td>
+              <td>
+                <input type="button" class="botao-excluir-pedido" value="X" />
+              </td>
+            </tr>
+          </table>
+        </select>
+          </div>
+        </div>
+    </div>
+
+    <div class="container-informacoes-pedido">
+        <button class="botao-fechar-modal">X</button>
+      <h2>Informe os dados do Pedido</h2>
+      <label for="informacao-pedido">Conclusao da Analise</label>
+      <select name="conclusao" id="conclusao-pedido">
+        <option value="">Selecione a Conclusao</option>
+        <option value="seguiu-devidamente">Seguiu Devidamente</option>
+        <option value="erro-operacional">Erro Operacional</option>
+        <option value="ato-inseguro">Ato Inseguro</option>
+        <option value="causa-indeterminada">Causa Indeterminada</option>
+      </select>
+
+      <div class="container-seguiu-devidamente">
+        <p>Valor Contestado </p>
+        <input type="number">        
+        <label for="transportadora">Transportadora do Pedido</label>
+        <select name="transportadora" id="transportadora">
+          <option value="">Selecione a Transportadora</option>
+          <option value="gfl">GFL</option>
+          <option value="azul">Azul</option>
+          <option value="rede-sul">Rede Sul</option>
+          <option value="total">Total Express</option>
+          <option value="jadlog">Jad Log</option>
+          <option value="jet">JeT</option>
+          <option value="correios">Correios</option>
+          <option value="fatelog">FateLog</option>
+        </select>
+      </div>
+      
+      <div class="container-erro-operacional">
+
+        <p>Valor Contestado</p>
+        <input type="number">
+
+        <label for="setor-ofensor">Setor Ofensor</label>
+
+        <select name="setor-ofensor" id="setor-ofensor">
+
+          <option value="">Informe o Setor</option>
+          <option value="expedicao">Expedição</option>
+          <option value="sorter">Sorter</option>
+          <option value="recebimento">Recebimento</option>
+          <option value="inventario">Inventário</option>
+          <option value="transporte">Transporte</option>
+          <option value="rma">RMA</option>
+          <option value="customiza">Customiza</option>
+          <option value="manutencao">Manutenção</option>
+          <option value="operador-empilhadeira">Operador de Empilhadeira</option>
+          <option value="490">490</option>
+
+        </select>
+
+        <label for="erro-cometido">Erro Cometido</label>
+
+        <select name="erro-cometido" id="erro-cometido">
+
+          <option value="">Informe o Erro</option>
+          <option value="inversao-nf">Inversão de Nota Fiscal</option>
+          <option value="enviado-em-outro-pedido">Enviado em Outro Pedido</option>
+          <option value="erro-pesagem">Pesagem Não Realizada</option>
+          <option value="encontrado-estoque">Encontrado no Estoque</option>
+          <option value="enviado-avaria">Enviado com Avaria</option>
+          <option value="etiqueta-danificada">Etiqueta Danificada</option>
+          <option value="erro-conferencia">Erro na Conferência</option>
+          <option value="erro-etiquetagem">Erro de Etiquetagem</option>
+          <option value="mov-sem-sistema">Movimentação sem Atualização Sistemica</option>
+          <option value="inventario-sistemico">Inventário Sistemico</option>
+          <option value="queda">Queda de Mercadoria</option>
+          <option value="erro-embarque">Embarcado na Transporadora Errada</option>
+          <option value="romaneio">Romaneio não Efetuado</option>
+          <option value="cadastro-site">Erro de Cadastro no Site</option>
+          <option value="avaria-estoque">Avarido no Estoque</option>
+          <option value="pedido-incompleto">Pedido Incompleto</option>
+          <option value="erro-embalagem">Erro de Embalagem</option>
+          <option value="mov-sistemica-sem-mercadoria">Movimentação Sistema Sem a Mercadoria</option>
+          <option value="erro-fornecedor">Erro do Fornecedor</option>
+          <option value="erro-montagem">Erro na Montagem</option>
+          <option value="erro-colmeia">Erro na Colmeia</option>
+          <option value="erro-login">Uso de Login Indevido</option>
+          <option value="ato-inseguro">Ato Inseguro</option>
+
+        </select>        
+
+        <p>Colaborador que Errou: </p>
+        <input type="text"> 
+
+        <label for="turno">Turno do Colaborador</label>
+
+        <select name="turno" id="turno">
+
+          <option value="">Selecione o Turno</option>
+          <option value="t1">T1</option>
+          <option value="t2">T2</option>
+          <option value="t3">T3</option>
+          <option value="t4">T4</option>
+          <option value="ADM">ADM</option>
+
+        </select>
+
+      </div>
+
+      <div class="container-ato-inseguro">
+
+        <p>Informe o nome do Colaborador que cometeu o Ato: </p>
+        <input type="text"> 
+        
+         <label for="setor">Setor</label>
+
+        <select name="setor" id="setor">
+
+          <option value="">Informe o Setor</option>
+          <option value="expedicao">Expedição</option>
+          <option value="sorter">Sorter</option>
+          <option value="recebimento">Recebimento</option>
+          <option value="inventario">Inventário</option>
+          <option value="transporte">Transporte</option>
+          <option value="rma">RMA</option>
+          <option value="customiza">Customiza</option>
+          <option value="manutencao">Manutenção</option>
+          <option value="operador-empilhadeira">Operador de Empilhadeira</option>
+          <option value="490">490</option>
+
+        </select>
+
+      </div>
+
+      <div class="container-causa-indeterminada">
+
+      </div>
+
+      <button class='finalizar-modal'>Finalizar</button>
+
+    </div> 
+
+    <script src="index.js"></script>
+  </body>
+</html>

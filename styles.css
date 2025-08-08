@@ -1,0 +1,420 @@
+body {
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(to bottom, #0835ff, #00054b);
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.pagina-toda {
+  background-color: rgb(32, 32, 32);
+  width: 768px;
+  margin: auto;
+  margin-top: 100px;
+  padding: 24px 0;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgb(0, 0, 0);
+}
+
+.header {
+  text-align: center;
+  /* border-bottom: solid 1px black; */
+}
+
+.navbar {
+  box-shadow: 0 2px 5px #000;
+}
+
+.navbar ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.navbar a:hover {
+  transform: scale(1);
+  border-radius: 5px;
+  box-shadow: 0 5px 5px #000;
+}
+
+.container-adicionar-pedido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container-adicionar-pedido h2 {
+  margin: 0 0 4px;
+  text-align: left;          /* antes center */
+}
+
+.botao-adicionar-pedido {
+  margin-left: 100px;
+}
+
+.container-selecao-pedido {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+}
+
+.container-selecao-pedido section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Barra de filtros (se usar) */
+.container-selecao-pedido .filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.container-selecao-pedido .filtros > * {
+  flex: 1 1 160px;
+  min-width: 140px;
+  margin: 0;
+}
+
+/* Campo de busca amplo */
+.container-selecao-pedido .campo-busca {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.container-selecao-pedido .campo-busca input[type="text"] {
+  flex: 1;
+  margin: 0;
+}
+
+/* Lista de pedidos */
+.lista-pedidos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Card / linha de pedido */
+.pedido-item {
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  transition: border-color .18s, background .18s;
+  cursor: pointer;
+}
+
+.pedido-item:hover {
+  background: #2d2d2d;
+  border-color: #3d3d3d;
+}
+
+.pedido-item.selecionado {
+  border-color: #0835ff;
+  box-shadow: 0 0 0 1px #0835ff inset;
+}
+
+/* Colunas dentro do card */
+.pedido-item .col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.pedido-item h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pedido-item .meta {
+  font-size: 12px;
+  color: #aaa;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pedido-item .status {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  background: #0835ff;
+  color: #fff;
+  border-radius: 12px;
+  align-self: flex-start;
+  letter-spacing: .5px;
+}
+
+.pedido-item .status.andamento { background:#ff9800; }
+.pedido-item .status.concluido { background:#2e7d32; }
+.pedido-item .status.pendente { background:#6d6d6d; }
+
+/* Botão de ação ao lado (ex: abrir / selecionar) */
+.pedido-item .acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  min-width: 110px;
+}
+
+.pedido-item .acoes button {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.pedido-item .acoes button.secundario {
+  background: #3a3a3a;
+}
+.pedido-item .acoes button.secundario:hover {
+  background: #474747;
+}
+
+/* Paginação (se houver) */
+.paginacao {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.paginacao button {
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+@media (max-width: 680px) {
+  .pedido-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pedido-item .acoes {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Mensagem vazio */
+.lista-pedidos-vazia {
+  text-align: center;
+  font-size: 14px;
+  padding: 24px 12px;
+  color: #aaa;
+  background: #222;
+  border: 1px dashed #444;
+  border-radius: 8px;
+}
+
+.container-pedido-andamento {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container-informacoes-pedido {
+  text-align: left;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgb(0, 0, 0);
+  font-size: 16px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: -325px;
+  z-index: 1;
+  padding: 32px 28px 28px 28px;
+}
+
+.container-informacoes-pedido label {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.container-informacoes-pedido input[type="text"],
+.container-informacoes-pedido input[type="number"],
+.container-informacoes-pedido select {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.container-informacoes-pedido p {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.container-informacoes-pedido .container-seguiu-devidamente,
+.container-informacoes-pedido .container-erro-operacional,
+.container-informacoes-pedido .container-ato-inseguro {
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 0;
+}
+
+.finalizar-modal {
+  align-self: flex-end;
+  margin-top: 12px;
+  min-width: 140px;
+}
+
+@media (max-width: 600px) {
+  .container-informacoes-pedido {
+    max-width: 98vw;
+    padding: 18px 6vw 18px 6vw;
+    margin-top: 0;
+  }
+}
+
+.container-seguiu-devidamente {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container-erro-operacional {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.container-ato-inseguro {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  border: 1.5px solid #0835ff;
+  background-color: #181818;
+}
+
+input[type="button"],
+button {
+  background-color: #0835ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+input[type="button"]:hover,
+button:hover {
+  background-color: #0022a7;
+}
+
+/* ===== Ajuste específico: ABA ADICIONAR PEDIDO ===== */
+.container-adicionar-pedido section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;      /* antes center */
+  gap: 14px;
+  width: 100%;
+  max-width: 480px;          /* largura do formulário */
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Blocos dinâmicos dentro da aba */
+.container-adicionar-pedido p,
+.container-adicionar-pedido .container-setor-solicitante,
+.container-adicionar-pedido .container-reclamacao-cliente,
+.container-adicionar-pedido .container-prioridade {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Inputs / selects dentro da aba ocupam toda a largura */
+.container-adicionar-pedido select,
+.container-adicionar-pedido input[type="text"],
+.container-adicionar-pedido input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* Botão da aba alinhado à direita do formulário */
+input[type="button"].botao-adicionar-pedido {
+  align-self: flex-end;
+  margin: 8px 0 0;
+  max-width: 200px;
+  width: auto;
+}
+
+/* Espaçamento vertical mais consistente em parágrafos que tenham texto + input inline */
+.container-adicionar-pedido p {
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
