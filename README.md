@@ -80,7 +80,7 @@ Para replicar este projeto, siga os passos abaixo:
 ![Aba de Seleção de Pedidos](./imgs/aba-selecionar.png)
 
 **Aba de Pedidos Em Andamento:**
-[Aba de Pedidos Em Andamento](./imgs/aba-andamento.png)
+![Aba de Pedidos Em Andamento](./imgs/aba-andamento.png)
 
 ## 👨‍💻 Autor
 
