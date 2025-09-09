@@ -73,14 +73,14 @@ Para replicar este projeto, siga os passos abaixo:
 
 ## 🖼️ Telas do Sistema
 
-**Tela de Adicionar Pedido:**
-![Tela de Adicionar Pedidos](./imgs/aba-adicionar.png)
+**Aba de Adicionar Pedido:**
+![Aba de Adicionar Pedidos](./imgs/aba-adicionar.png)
 
-**Tela de Pedidos em Andamento:**
-`[insira aqui a imagem da tabela de pedidos]`
+**Aba de Pedidos em Andamento:**
+![Aba de Seleção de Pedidos](./imgs/aba-selecionar.png)
 
-**Modal de Finalização:**
-`[insira aqui a imagem do formulário de conclusão]`
+**Aba de Pedidos Em Andamento:**
+[Aba de Pedidos Em Andamento](./imgs/aba-andamento.png)
 
 ## 👨‍💻 Autor
 
