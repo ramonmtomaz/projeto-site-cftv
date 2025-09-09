@@ -10,16 +10,572 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
       rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
+    />    
+    <style>
+            body {
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(to bottom, #0835ff, #00054b);
+            background-repeat: no-repeat;
+            height: 120vh;
+          }
+
+          .pagina-toda {
+            background-color: #f74f12;
+            width: 860px;
+            margin: auto;
+            /* margin-top: 100px; */
+            padding: 24px 0;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgb(0, 0, 0);
+          }
+
+          header {
+            display: flex;            
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            
+          }
+
+          #logo-kabum {
+            height: 50px;
+            width: 50px;
+           
+          }
+
+          .navbar {
+            box-shadow: 0 2px 5px #000;
+          }
+
+          .navbar ul {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .navbar a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+          }
+
+          .navbar a:hover {
+            transform: scale(1);
+            border-radius: 5px;
+            box-shadow: 0 5px 5px #000;
+          }
+
+          .container-adicionar-pedido {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-adicionar-pedido h2 {
+            margin: 0 0 4px;
+            text-align: left;          /* antes center */
+          }
+
+          .botao-adicionar-pedido {
+            margin-left: 100px;
+          }
+
+          .container-selecao-pedido {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 24px;
+          }
+
+          .container-selecao-pedido section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            width: 100%;
+            max-width: 640px;            
+          }
+
+          /* Barra de filtros (se usar) */
+          .container-selecao-pedido .filtros {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+          }
+
+          .container-selecao-pedido .filtros > * {
+            flex: 1 1 160px;
+            min-width: 140px;
+            margin: 0;
+          }
+
+          /* Campo de busca amplo */
+          .container-selecao-pedido .campo-busca {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+          }
+          .container-selecao-pedido .campo-busca input[type="text"] {
+            flex: 1;
+            margin: 0;
+          }
+
+          /* Lista de pedidos */
+          .lista-pedidos {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 4px 0 0;
+            padding: 0;
+            list-style: none;
+          }
+
+          /* Card / linha de pedido */
+          .pedido-item {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 14px 16px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            justify-content: space-between;
+            transition: border-color .18s, background .18s;
+            cursor: pointer;
+          }
+
+          .pedido-item:hover {
+            background: #2d2d2d;
+            border-color: #3d3d3d;
+          }
+
+          .pedido-item.selecionado {
+            border-color: #0835ff;
+            box-shadow: 0 0 0 1px #0835ff inset;
+          }
+
+          /* Colunas dentro do card */
+          .pedido-item .col {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+          }
+
+          .pedido-item h4 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #fff;
+          }
+
+          .pedido-item .meta {
+            font-size: 12px;
+            color: #aaa;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+          }
+
+          .pedido-item .status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            background: #0835ff;
+            color: #fff;
+            border-radius: 12px;
+            align-self: flex-start;
+            letter-spacing: .5px;
+          }
+
+          .pedido-item .status.andamento { background:#ff9800; }
+          .pedido-item .status.concluido { background:#2e7d32; }
+          .pedido-item .status.pendente { background:#6d6d6d; }
+
+          /* Botão de ação ao lado (ex: abrir / selecionar) */
+          .pedido-item .acoes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+            min-width: 110px;
+          }
+
+          .pedido-item .acoes button {
+            width: 100%;
+            padding: 8px 10px;
+            font-size: 13px;
+          }
+
+          .pedido-item .acoes button.secundario {
+            background: #3a3a3a;
+          }
+          .pedido-item .acoes button.secundario:hover {
+            background: #474747;
+          }
+
+          /* Paginação (se houver) */
+          .paginacao {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 8px;
+          }
+
+          .paginacao button {
+            padding: 6px 14px;
+            font-size: 13px;
+          }
+
+          @media (max-width: 680px) {
+            .pedido-item {
+              flex-direction: column;
+              gap: 10px;
+            }
+            .pedido-item .acoes {
+              flex-direction: row;
+              width: 100%;
+              justify-content: flex-end;
+            }
+          }
+
+          /* Mensagem vazio */
+          .lista-pedidos-vazia {
+            text-align: center;
+            font-size: 14px;
+            padding: 24px 12px;
+            color: #aaa;
+            background: #222;
+            border: 1px dashed #444;
+            border-radius: 8px;
+          }
+
+          .container-pedido-andamento {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-informacoes-pedido {
+            display: none; 
+            position: fixed; 
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);            
+            justify-content: center;
+            align-items: center;
+          }
+
+          .modal-janela {
+            background-color: rgb(32, 32, 32);
+            color: white;
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgb(0, 0, 0);
+            width: 100%;
+            max-width: 500px;       
+            max-height: 90vh; 
+            overflow-y: auto;           
+            position: relative;
+            margin: auto;
+          }
+
+          .container-informacoes-pedido label {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 4px;
+          }
+
+          .container-informacoes-pedido input[type="text"],
+          .container-informacoes-pedido input[type="number"],
+          .container-informacoes-pedido select {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+          }
+
+          .container-informacoes-pedido p {
+            margin: 0 0 8px 0;
+            font-size: 15px;
+            font-weight: 500;
+          }
+
+          .container-informacoes-pedido .container-seguiu-devidamente,
+          .container-informacoes-pedido .container-erro-operacional,
+          .container-informacoes-pedido .container-ato-inseguro {
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            padding: 0;
+          }
+
+          .finalizar-modal {
+            align-self: flex-end;
+            margin-top: 12px;
+            min-width: 140px;
+          }
+
+          @media (max-width: 600px) {
+            .container-informacoes-pedido {
+              max-width: 98vw;
+              padding: 18px 6vw 18px 6vw;
+              margin-top: 0;
+            }
+          }
+
+          .container-seguiu-devidamente {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-erro-operacional {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-ato-inseguro {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-causa-indeterminada {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-ato-indevido {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+
+          .container-sim, .container-nao {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+          }
+         
+
+          input[type="text"],
+          input[type="number"],
+          select {
+            background-color: white;
+            color: black;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin: 6px 0;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.2s;
+          }
+
+          input[type="text"]:focus,
+          input[type="number"]:focus,
+          select:focus {
+            border: 1.5px solid #0835ff;
+            background-color: white;
+          }
+
+          input[type="button"],
+          button {
+            background-color: #0835ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+          }
+
+          input[type="button"]:hover,
+          button:hover {
+            background-color: #0022a7;
+          }
+
+          /* ===== Ajuste específico: ABA ADICIONAR PEDIDO ===== */
+          .container-adicionar-pedido section {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;      /* antes center */
+            gap: 14px;
+            width: 100%;
+            max-width: 480px;          /* largura do formulário */
+            margin: 0 auto;
+            text-align: left;
+          }
+
+          /* Blocos dinâmicos dentro da aba */
+          .container-adicionar-pedido p,
+          .container-adicionar-pedido .container-setor-solicitante,
+          .container-adicionar-pedido .container-reclamacao-cliente,
+          .container-adicionar-pedido .container-prioridade {
+            width: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          }
+
+          /* Inputs / selects dentro da aba ocupam toda a largura */
+          .container-adicionar-pedido select,
+          .container-adicionar-pedido input[type="text"],
+          .container-adicionar-pedido input[type="number"] {
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0;
+          }
+
+          /* Botão da aba alinhado à direita do formulário */
+          input[type="button"].botao-adicionar-pedido {
+            align-self: flex-end;
+            margin: 8px 0 0;
+            max-width: 200px;
+            width: auto;
+          }
+
+          /* Espaçamento vertical mais consistente em parágrafos que tenham texto + input inline */
+          .container-adicionar-pedido p {
+            gap: 4px;
+            font-size: 14px;
+            line-height: 1.3;
+          }
+
+          .container-adicionar-pedido > section > .container-reclamacao-cliente {
+            display: none;
+          }
+
+          /* Estilo para o container do spinner (overlay) */
+          .container-spinner {
+              display: none; 
+              position: fixed; 
+              z-index: 2000; 
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5);             
+              display: flex;
+              justify-content: center;
+              align-items: center;
+          }
+
+          .container-spinner .spinner {
+              border: 8px solid #f3f3f3;
+              border-top: 8px solid #0835ff;
+              border-radius: 50%;
+              width: 60px;
+              height: 60px;
+              animation: spin 1s linear infinite;
+          }
+
+          @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+          }
+
+          td {
+            /* border: solid #00000061 1px; */          
+            padding: 15px;
+            text-align: center;
+            background-color: white;
+            color: black;
+            box-shadow: 0 5px 5px rgb(0, 0, 0);
+          }
+
+          th {
+            padding: 6px;
+          }
+
+          .container-alertas {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5); 
+            display: flex;
+            left: 0;
+            top: 0;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;            
+            position: fixed;
+            z-index: 2001;
+          }
+
+          .alerta-ja-inserido, .alerta-pedido-inserido, .alerta-pedido-selecionado, .alerta-pedido-finalizado {
+            display: none;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            justify-content: center;
+            align-items: center;            
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 5px white;
+          }
+
+
+          .contador-de-analises {
+            display:flex; 
+            justify-content:center; 
+            align-items:center; 
+            font-size:36px;
+          }
+
+          .botao-finalizar-pedido, .botao-excluir-pedido{
+            background-color: white;
+            font-size: 24px;
+          }
+
+          .botao-finalizar-pedido:hover {
+            background-color: green;
+          }
+
+          .botao-excluir-pedido:hover {
+            background-color: red;
+          }
+
+          
+    </style>
   </head>
   <body>
-    <div class="pagina-toda">
-      <div class="header">
+    <div class="pagina-toda">      
         <header>
-          <h1>CFTV Prevenção de Perdas 2025</h1>
+          <img src="https://dna.kabum.com.br/img/aplicacao-logo-3.png" alt="Logo do KaBuM!" id="logo-kabum">
+          <h1>CFTV Prevenção de Perdas 2025</h1>          
         </header>
-      </div>
+      
 
       <nav class="navbar">
         <ul>
@@ -44,21 +600,23 @@
             <label for="setor-solicitante">Setor Solicitante</label>
             <select name="setores" id="setor-solicitante">
               <option value="">Selecione o Setor</option>
-              <option value="atendimento">Atendimento</option>
-              <option value="expedicao">Expedição</option>
-              <option value="juridico">Jurídico</option>
-              <option value="she">Segurança do Trabalho</option>
-              <option value="cx-magalu">CX Magalu</option>
-              <option value="rma">RMA</option>
-              <option value="recebimento">Recebimento</option>
-              <option value="transporte">Transporte</option>
-              <option value="inventario">Inventário</option>
-              <option value="reclame-aqui">Reclame Aqui</option>
-              <option value="pp-magalu">Prev de Perdas Magalu</option>
-              <option value="qualidade">Qualidade</option>
-              <option value="rh">RH</option>
-              <option value="seguranca">Segurança Patrimonial</option>
-              <option value="manutencao">Manutenção</option>
+              <option value="Atendimento">Atendimento</option>
+              <option value="Expedição">Expedição</option>
+              <option value="Jurídico">Jurídico</option>
+              <option value="Segurança do Trabalho">Segurança do Trabalho</option>
+              <option value="CX Magalu">CX Magalu</option>
+              <option value="RMA">RMA</option>
+              <option value="Recebimento">Recebimento</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Inventário">Inventário</option>
+              <option value="Reclame Aqui">Reclame Aqui</option>
+              <option value="Prev de Perdas Magalu">Prev de Perdas Magalu</option>
+              <option value="Qualidade">Qualidade</option>
+              <option value="RH">RH</option>
+              <option value="Segurança Patrimonial">Segurança Patrimonial</option>
+              <option value="Manutençao">Manutenção</option>
+              <option value="Customiza">Customiza</option>
+              <option value="Monte o Seu">Monte o Seu</option>
             </select>
           </div>
 
@@ -66,10 +624,10 @@
             <label for="reclamacao-cliente">Reclamação do Cliente</label>
             <select name="reclamacao" id="reclamacao-cliente">
               <option value="">Informe a Reclamação:</option>
-              <option value="avaria">Avaria</option>
-              <option value="falta-de-produto">Falta de Produto</option>
-              <option value="produto-improcedente">Produto Improcedente</option>
-              <option value="troca-pedido">Troca de Pedido</option>
+              <option value="Avaria">Avaria</option>
+              <option value="Falta de Produto">Falta de Produto</option>
+              <option value="Produto Improcedente">Produto Improcedente</option>
+              <option value="Troca Pedido">Troca de Pedido</option>
             </select>
           </div>
 
@@ -77,10 +635,10 @@
             <label for="prioridade-pedido">Prioridade do Pedido</label>
             <select name="prioridade" id="prioridade-pedido">
               <option value="">Defina a Prioridade:</option>
-              <option value="urgente">Urgente</option>
-              <option value="alta">Alta</option>
-              <option value="media">Média</option>
-              <option value="baixa">Baixa</option>
+              <option value="Urgente">Urgente</option>
+              <option value="Alta">Alta</option>
+              <option value="Média">Média</option>
+              <option value="Baixa">Baixa</option>
             </select>
           </div>
 
@@ -95,19 +653,20 @@
       <!-- ABA DE SELECAO DE PEDIDO -->
       <div class="container-selecao-pedido">
         <section>
-          <h2>Seleciona um pedido</h2>
+          <h2>Selecione um pedido</h2>
           <div class="quantidade-pedidos">
-            <p>Mostrar quantidade de Pedidos</p>
+            <p>Quantidade de Pedidos aguardando análise:</p>
+            <b class='contador-de-analises'>Carregando...</b>
           </div>
-          <label for="auditores">Quem vai fazer?</label>
+          <label for="auditores"></label>
           <select name="auditores" id="auditores">
-            <option value="">Seleciona o seu nome:</option>
-            <option value="jaqueline">Jaqueline</option>
-            <option value="jefferson">jefferson</option>
-            <option value="kamili">Kamili</option>
-            <option value="lucas">Lucas</option>
-            <option value="ramon">Ramon</option>
-            <option value="rodrigo">Rodrigo</option>
+            <option value="">Quem vai fazer?</option>
+            <option value="Jaqueline">Jaqueline</option>
+            <option value="Jefferson">jefferson</option>
+            <option value="Kamili">Kamili</option>
+            <option value="Lucas">Lucas</option>
+            <option value="Ramon">Ramon</option>
+            <option value="Rodrigo">Rodrigo</option>
           </select>
 
           <input type="button" class="selecionar-pedido" value="Selecionar" />
@@ -115,167 +674,661 @@
       </div>
       <!-- ABA DE PEDIDOS EM ANDAMENTO -->
       <div class="container-pedido-andamento">
-        <h2>Pedidos em Andamento</h2>
-        <div class="pedidos-andamento">
-          <table>
-            <tr>
-              <th>Email do Pedido</th>
-              <th>Numero do Pedido</th>
-              <th>Auditor</th>
-              <th>Finalizar</th>
-              <th>Excluir</th>
-            </tr>
-            <tr>
-              <td>link</td>
-              <td>12345678</td>
-              <td>Ramon</td>
-              <td>
-                <input type="button" class="botao-finalizar-pedido" value="V" />
-              </td>
-              <td>
-                <input type="button" class="botao-excluir-pedido" value="X" />
-              </td>
-            </tr>
-          </table>
-        </select>
+          <h2>Pedidos em Andamento</h2>
+          <div class="pedidos-andamento">
+            <table>
+              <thead>
+                <tr>
+                  <th>Email do Pedido</th>
+                  <th>Relatorio do Pedido</th>
+                  <th>Numero do Pedido</th>
+                  <th>Auditor</th>
+                  <th>Finalizar</th>
+                  <th>Excluir</th>
+                </tr>
+              </thead>
+              <tbody class='container-tabela'>
+                <tr>                
+                </tr>
+              </tbody>
+            </table>        
+            </div>
           </div>
+      </div>
+
+     <div class="container-informacoes-pedido">
+      <div class="modal-janela">
+        <button class="botao-fechar-modal">X</button>
+        <h2>Informe os dados do Pedido</h2>
+        <label for="informacao-pedido">Conclusao da Analise</label>
+        <select name="conclusao" id="conclusao-pedido">
+            <option value="">Selecione a Conclusao</option>
+            <option value="Seguiu Devidamente">Seguiu Devidamente</option>
+            <option value="Erro Operacional">Erro Operacional</option>
+            <option value="Causa Indeterminada">Causa Indeterminada</option>
+            <option value="Ato Inseguro">Ato Inseguro</option>
+            <option value="Ato Indevido">Ato Indevido</option>
+            <!-- <option value="Informação Equivocada">Informação Equivocada</option> -->
+        </select>
+
+        <div class="container-ato-indevido">          
+          <label for="movimentacao">Ocorreu a movimentação suspeita?</label>
+          <select name="movimentacao" id="movimentacao">
+            <option value="">Selecione a opção:</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+          <div class="container-sim">
+            <p>Informe o nome do colaborador que realizou o ato indevido:</p>
+            <input type="text" class="nomeIndevido" placeholder="Digite aqui...">
+            <p>Fale com poucas palavras sobre o ocorrido:</p>
+            <input type="text" class="observacao" placeholder="Digite aqui...">
+          </div>
+          <div class="container-nao">
+            <p>Se não houve nenhum ato indevido, clique no botão para finalizar!</p>
+          </div>
+        </div>
+
+        <div class="container-seguiu-devidamente">
+            <p>Valor Contestado </p>
+            <input type="text" class="valor-pedido" id="valor-sd" placeholder="Informe o valor.">
+            <label for="transportadora">Transportadora do Pedido</label>
+            <select name="transportadora" id="transportadora">
+                <option value="">Selecione a Transportadora</option>
+                <option value="GFL">GFL</option>
+                <option value="Azul">Azul</option>
+                <option value="Rede Sul">Rede Sul</option>
+                <option value="Total">Total Express</option>
+                <option value="Jadlog">Jad Log</option>
+                <option value="JeT">JeT</option>
+                <option value="Correios">Correios</option>
+                <option value="Fatelog">FateLog</option>
+                <option value="Favorita">Favorita</option>
+                <option value="LogPlace">LogPlace</option>
+            </select>
+        </div>
+        
+        <div class="container-erro-operacional">
+            <p>Valor Contestado</p>
+            <input type="text" class="valor-pedido" id="valor-eo">
+
+            <label for="setor-ofensor-eo">Setor Ofensor</label>
+            <select name="setor-ofensor" id="setor-ofensor-eo">
+                <option value="">Informe o Setor</option>
+                <option value="Expedição">Expedição</option>
+                <option value="Sorter">Sorter</option>
+                <option value="Recebimento">Recebimento</option>
+                <option value="Inventário">Inventário</option>
+                <option value="Transporte">Transporte</option>
+                <option value="RMA">RMA</option>
+                <option value="Customiza">Customiza</option>
+                <option value="Manutenção">Manutenção</option>
+                <option value="Operador de Empilhadeira">Operador de Empilhadeira</option>
+                <option value="490">490</option>                
+                <option value="Monte o Seu">Monte o Seu</option>
+                <option value="Setor que cadastra no Site">Setor que cadastra no Site</option>
+            </select>
+
+            <label for="erro-cometido">Erro Cometido</label>
+            <select name="erro-cometido" id="erro-cometido">
+                <option value="">Informe o Erro</option>
+                <option value="Inversão de Nota Fiscal">Inversão de Nota Fiscal</option>
+                <option value="Enviado em Outro Pedido">Enviado em Outro Pedido</option>
+                <option value="Pesagem não Realizada">Pesagem Não Realizada</option>
+                <option value="Encontrado no Estoque">Encontrado no Estoque</option>
+                <option value="Enviado com Avaria">Enviado com Avaria</option>
+                <option value="Etiqueta Danificada">Etiqueta Danificada</option>
+                <option value="Erro na Conferência">Erro na Conferência</option>
+                <option value="Erro de Etiquetagem">Erro de Etiquetagem</option>
+                <option value="Inventário Sistêmico">Inventário Sistemico</option>
+                <option value="Queda de Mercadoria">Queda de Mercadoria</option>
+                <option value="Embarcado na Transportadora Errada">Embarcado na Transporadora Errada</option>
+                <option value="Romaneio">Romaneio não Efetuado</option>
+                <option value="Erro de Cadastro no Site">Erro de Cadastro no Site</option>
+                <option value="Avariado no Estoque">Avariado no Estoque</option>
+                <option value="Pedido Incompleto">Pedido Incompleto</option>
+                <option value="Erro de Embalagem">Erro de Embalagem</option>
+                <option value="Erro de Fornecedor">Erro do Fornecedor</option>
+                <option value="Erro na Montagem">Erro na Montagem</option>
+                <option value="Erro na Colmeia">Erro na Colmeia</option>
+                <option value="Uso de Login Indevido">Uso de Login Indevido</option>
+                <option value="Ato Inseguro">Ato Inseguro</option>
+                <option value="Movimentação sem Atualização Sistemica">Movimentação sem Atualização Sistemica</option>
+                <option value="Movimentação Sistema Sem a Mercadoria">Movimentação Sistema Sem a Mercadoria</option>
+            </select>
+
+            <p>Colaborador que Errou: </p>
+            <input type="text" id="nome-colaborador-eo">
+
+            <label for="turno">Turno do Colaborador</label>
+            <select name="turno" id="turno">
+                <option value="">Selecione o Turno</option>
+                <option value="T1">T1</option>
+                <option value="T2">T2</option>
+                <option value="T3">T3</option>
+                <option value="T4">T4</option>
+                <option value="ADM">ADM</option>
+            </select>
+        </div>
+
+        <div class="container-ato-inseguro">
+            <p>Informe o nome do Colaborador que cometeu o Ato: </p>
+            <input type="text" id="nome-colaborador-ai">
+            
+            <label for="setor-ofensor-ai">Setor</label>
+            <select name="setor" id="setor-ofensor-ai">
+                <option value="">Informe o Setor</option>
+                <option value="Expedição">Expedição</option>
+                <option value="Sorter">Sorter</option>
+                <option value="Recebimento">Recebimento</option>
+                <option value="Inventário">Inventário</option>
+                <option value="Transporte">Transporte</option>
+                <option value="RMA">RMA</option>
+                <option value="Customiza">Customiza</option>
+                <option value="Manutenção">Manutenção</option>
+                <option value="Operador de Empilhadeira">Operador de Empilhadeira</option>
+                <option value="490">490</option>
+                <option value="Monte o Seu">Monte o Seu</option>
+            </select>
+        </div>
+
+        <div class="container-causa-indeterminada">
+            <p>Valor Contestado</p>
+            <input type="text" class="valor-pedido" id="valor-pedido-ci">
+        </div>
+
+        <button class='finalizar-modal'>Finalizar</button>
         </div>
     </div>
 
-    <div class="container-informacoes-pedido">
-        <button class="botao-fechar-modal">X</button>
-      <h2>Informe os dados do Pedido</h2>
-      <label for="informacao-pedido">Conclusao da Analise</label>
-      <select name="conclusao" id="conclusao-pedido">
-        <option value="">Selecione a Conclusao</option>
-        <option value="seguiu-devidamente">Seguiu Devidamente</option>
-        <option value="erro-operacional">Erro Operacional</option>
-        <option value="ato-inseguro">Ato Inseguro</option>
-        <option value="causa-indeterminada">Causa Indeterminada</option>
-      </select>
-
-      <div class="container-seguiu-devidamente">
-        <p>Valor Contestado </p>
-        <input type="number">        
-        <label for="transportadora">Transportadora do Pedido</label>
-        <select name="transportadora" id="transportadora">
-          <option value="">Selecione a Transportadora</option>
-          <option value="gfl">GFL</option>
-          <option value="azul">Azul</option>
-          <option value="rede-sul">Rede Sul</option>
-          <option value="total">Total Express</option>
-          <option value="jadlog">Jad Log</option>
-          <option value="jet">JeT</option>
-          <option value="correios">Correios</option>
-          <option value="fatelog">FateLog</option>
-        </select>
-      </div>
+    <div class='container-spinner'>
+      <div class='spinner'></div>
+    </div>
       
-      <div class="container-erro-operacional">
+      <!-- <div class='container-alertas'>
+        <div class='alerta-ja-inserido'>
+          <button class='fechar-alerta'>Fechar</button>
+          <p>Este pedido já foi inserido na planilha!</p>
+        </div>
+        <div class='alerta-pedido-inserido'>        
+          <button class='fechar-alerta'>Fechar</button>
+          <p>O pedido foi inserido na planilha!</p>
+        </div>
+        <div class="alerta-pedido-selecionado">
+          <button class='fechar-alerta'>Fechar</button>
+          <p>Pedido selecionado! Consulte a aba de Pedidos em Andamento.</p>
+        </div>
+        <div class='alerta-pedido-finalizado'>
+          <button class='fechar-alerta'>Fechar</button>
+          <p>Pedido finalizado!</p>
+        </div>
+      </div> -->
 
-        <p>Valor Contestado</p>
-        <input type="number">
 
-        <label for="setor-ofensor">Setor Ofensor</label>
+    <!-- SCRIPT PARA MANIPULAR CSS DA PAGINA -->
+    <script>
+      function mostrarAba () {
+          const abaAdicionar = document.querySelector('.aba-adicionar-pedido');
+          const abaSelecionar = document.querySelector('.aba-selecionar-pedido');
+          const abaAndamento = document.querySelector('.aba-em-andamento');
 
-        <select name="setor-ofensor" id="setor-ofensor">
+          abaAdicionar.addEventListener('click', function() {
+              document.querySelector('.container-adicionar-pedido').style.display = 'flex';
+              document.querySelector('.container-selecao-pedido').style.display = 'none';
+              document.querySelector('.container-pedido-andamento').style.display = 'none';
+          });
 
-          <option value="">Informe o Setor</option>
-          <option value="expedicao">Expedição</option>
-          <option value="sorter">Sorter</option>
-          <option value="recebimento">Recebimento</option>
-          <option value="inventario">Inventário</option>
-          <option value="transporte">Transporte</option>
-          <option value="rma">RMA</option>
-          <option value="customiza">Customiza</option>
-          <option value="manutencao">Manutenção</option>
-          <option value="operador-empilhadeira">Operador de Empilhadeira</option>
-          <option value="490">490</option>
+          abaSelecionar.addEventListener('click', function() {
+              document.querySelector('.container-adicionar-pedido').style.display = 'none';
+              document.querySelector('.container-selecao-pedido').style.display = 'flex';
+              document.querySelector('.container-pedido-andamento').style.display = 'none';
+          });
 
-        </select>
+          abaAndamento.addEventListener('click', function() {
+              document.querySelector('.container-adicionar-pedido').style.display = 'none';
+              document.querySelector('.container-selecao-pedido').style.display = 'none';
+              document.querySelector('.container-pedido-andamento').style.display = 'flex';
+          });
+      }
 
-        <label for="erro-cometido">Erro Cometido</label>
 
-        <select name="erro-cometido" id="erro-cometido">
+      function finalizarPedidoAba() {
+          const botaoFinalizarPedido = document.querySelector('.botao-finalizar-pedido');
+          const modalConcluirPedido = document.querySelector('.container-informacoes-pedido');
+          const botaoFecharModal = document.querySelector('.botao-fechar-modal');
+          const conclusaoDoPedido = document.querySelector('#conclusao-pedido');
+          const seguiuDevidamente = document.querySelector('.container-seguiu-devidamente');
+          const erroOperacional = document.querySelector('.container-erro-operacional');
+          const atoInseguro = document.querySelector('.container-ato-inseguro');
+          const causaIndeterminada = document.querySelector('.container-causa-indeterminada');
+          const atoIndevido = document.querySelector('.container-ato-indevido');
+          const simOuNao = document.querySelector('#movimentacao');   
+          const campoSim = document.querySelector('.container-sim');
+          const campoNao = document.querySelector('.container-nao');       
 
-          <option value="">Informe o Erro</option>
-          <option value="inversao-nf">Inversão de Nota Fiscal</option>
-          <option value="enviado-em-outro-pedido">Enviado em Outro Pedido</option>
-          <option value="erro-pesagem">Pesagem Não Realizada</option>
-          <option value="encontrado-estoque">Encontrado no Estoque</option>
-          <option value="enviado-avaria">Enviado com Avaria</option>
-          <option value="etiqueta-danificada">Etiqueta Danificada</option>
-          <option value="erro-conferencia">Erro na Conferência</option>
-          <option value="erro-etiquetagem">Erro de Etiquetagem</option>
-          <option value="mov-sem-sistema">Movimentação sem Atualização Sistemica</option>
-          <option value="inventario-sistemico">Inventário Sistemico</option>
-          <option value="queda">Queda de Mercadoria</option>
-          <option value="erro-embarque">Embarcado na Transporadora Errada</option>
-          <option value="romaneio">Romaneio não Efetuado</option>
-          <option value="cadastro-site">Erro de Cadastro no Site</option>
-          <option value="avaria-estoque">Avarido no Estoque</option>
-          <option value="pedido-incompleto">Pedido Incompleto</option>
-          <option value="erro-embalagem">Erro de Embalagem</option>
-          <option value="mov-sistemica-sem-mercadoria">Movimentação Sistema Sem a Mercadoria</option>
-          <option value="erro-fornecedor">Erro do Fornecedor</option>
-          <option value="erro-montagem">Erro na Montagem</option>
-          <option value="erro-colmeia">Erro na Colmeia</option>
-          <option value="erro-login">Uso de Login Indevido</option>
-          <option value="ato-inseguro">Ato Inseguro</option>
+          botaoFecharModal.addEventListener('click', function() {
+              modalConcluirPedido.style.display = 'none';
+          });
+          
+          conclusaoDoPedido.addEventListener('change', function() {       
+            
+              if (conclusaoDoPedido.value === 'Seguiu Devidamente') {
+                  seguiuDevidamente.style.display = 'flex';
+                  erroOperacional.style.display = 'none';
+                  atoInseguro.style.display = 'none';
+                  causaIndeterminada.style.display = 'none';
+                  atoIndevido.style.display = 'none';
+              } else if (conclusaoDoPedido.value === 'Erro Operacional') {
+                  erroOperacional.style.display = 'flex';
+                  seguiuDevidamente.style.display = 'none';
+                  atoInseguro.style.display = 'none';
+                  causaIndeterminada.style.display = 'none';
+                  atoIndevido.style.display = 'none';
+              } else if (conclusaoDoPedido.value === 'Ato Inseguro') {
+                  atoInseguro.style.display = 'flex';
+                  seguiuDevidamente.style.display = 'none';
+                  erroOperacional.style.display = 'none';
+                  causaIndeterminada.style.display = 'none';
+                  atoIndevido.style.display = 'none';
+              } else if (conclusaoDoPedido.value === 'Causa Indeterminada') {
+                  causaIndeterminada.style.display = 'flex';
+                  seguiuDevidamente.style.display = 'none';
+                  erroOperacional.style.display = 'none';
+                  atoInseguro.style.display = 'none';
+                  atoIndevido.style.display = 'none';
+              } else if (conclusaoDoPedido.value === 'Ato Indevido') {
+                  atoIndevido.style.display = 'flex';
+                  causaIndeterminada.style.display = 'none';
+                  seguiuDevidamente.style.display = 'none';
+                  erroOperacional.style.display = 'none';
+                  atoInseguro.style.display = 'none';
+              } else if (conclusaoDoPedido.value === '') {
+                  seguiuDevidamente.style.display = 'none';
+                  erroOperacional.style.display = 'none';
+                  causaIndeterminada.style.display = 'none';
+                  atoInseguro.style.display = 'none';
+                  atoIndevido.style.display = 'none';
+              }
+          });
+          simOuNao.addEventListener('change', function() {
+            if (simOuNao.value === 'Sim') {
+              campoSim.style.display = 'flex';
+              campoNao.style.display = 'none';
+            } else if (simOuNao.value === 'Não') {
+              campoNao.style.display = 'flex';
+              campoSim.style.display = 'none';
+            } else {
+              campoNao.style.display = 'none';
+              campoSim.style.display = 'none';
+            }
+          })
+      }
 
-        </select>        
 
-        <p>Colaborador que Errou: </p>
-        <input type="text"> 
+      function reclamacaoCliente() {
+        const setorSolicitante = document.querySelector('#setor-solicitante');
+        const reclamacaoDoCliente = document.querySelector('.container-reclamacao-cliente');
+        const setoresComReclamacao = [
+          'Atendimento',
+          'Jurídico',
+          'CX Magalu',
+          'Reclame Aqui'
+        ];
 
-        <label for="turno">Turno do Colaborador</label>
+        setorSolicitante.addEventListener('change', function() {
+          if (setoresComReclamacao.includes(setorSolicitante.value)) {
+            reclamacaoDoCliente.style.display = 'flex';
+          } else {
+            reclamacaoDoCliente.style.display = 'none';
+          }
+        })
+      }
 
-        <select name="turno" id="turno">
+      mostrarAba();
+      finalizarPedidoAba();
+      reclamacaoCliente();      
+    </script>
 
-          <option value="">Selecione o Turno</option>
-          <option value="t1">T1</option>
-          <option value="t2">T2</option>
-          <option value="t3">T3</option>
-          <option value="t4">T4</option>
-          <option value="ADM">ADM</option>
+    <!-- SCRIPT PARA COMUNICAR COM O GS -->
+     <script>
+      const overlaySpinner = document.querySelector('.container-spinner');
+      function mostrarSpinner() {
+          overlaySpinner.style.display = 'flex';
+      }
+      function esconderSpinner() {
+          overlaySpinner.style.display = 'none';
+      }
 
-        </select>
 
-      </div>
+      document.querySelector('.botao-adicionar-pedido').addEventListener('click', enviarFormularioDePedido);    
+      function enviarFormularioDePedido() {
+        const numeroPedido = document.querySelector('.input-adicionar-pedido');
+        const setorSolicitante = document.querySelector('#setor-solicitante');
+        const reclamacaoCliente = document.querySelector('#reclamacao-cliente');
+        const prioridadePedido = document.querySelector('#prioridade-pedido');
 
-      <div class="container-ato-inseguro">
+        if (numeroPedido.value && setorSolicitante.value && prioridadePedido.value) {
+          mostrarSpinner();
+          document.querySelector('.botao-adicionar-pedido').disabled = true;
 
-        <p>Informe o nome do Colaborador que cometeu o Ato: </p>
-        <input type="text"> 
-        
-         <label for="setor">Setor</label>
+          google.script.run
+            .withSuccessHandler(function(respostaDoServidor) {
+              alert(respostaDoServidor);
 
-        <select name="setor" id="setor">
+              if (respostaDoServidor.includes('sucesso')) {                
+                numeroPedido.value = '';
+                setorSolicitante.value = '';
+                reclamacaoCliente.value = '';
+                prioridadePedido.value = '';
+                contadorDeAnalises();                   
 
-          <option value="">Informe o Setor</option>
-          <option value="expedicao">Expedição</option>
-          <option value="sorter">Sorter</option>
-          <option value="recebimento">Recebimento</option>
-          <option value="inventario">Inventário</option>
-          <option value="transporte">Transporte</option>
-          <option value="rma">RMA</option>
-          <option value="customiza">Customiza</option>
-          <option value="manutencao">Manutenção</option>
-          <option value="operador-empilhadeira">Operador de Empilhadeira</option>
-          <option value="490">490</option>
+              } 
+                esconderSpinner();         
+                document.querySelector('.botao-adicionar-pedido').disabled = false;                             
+            })
+            .withFailureHandler(function(error) {
 
-        </select>
+              alert('Deu erro: ' + error)              
+                document.querySelector('.botao-adicionar-pedido').disabled = false;
+                esconderSpinner();
+            })
+            .adicionarPedido(
+              numeroPedido.value.trim(),
+              setorSolicitante.value,
+              reclamacaoCliente.value,
+              prioridadePedido.value
+            );
+        } else {
+          alert('Por favor, preencha todos os campos.');
+        }        
+      }
 
-      </div>
+    function contadorDeAnalises() {
+      console.log("A função de Contar Analises foi chamada!")
+      
 
-      <div class="container-causa-indeterminada">
+      google.script.run
+        .withSuccessHandler(function(totalDeAnalises) {
+          document.querySelector('.contador-de-analises').innerText = totalDeAnalises;
+        })
+        .withFailureHandler(function(erro) {
+          document.querySelector('.contador-de-analises').innerText = 'Erro!';
+          console.error(erro);
+        })
+        .contadorPedido();
+    }
 
-      </div>
+    document.addEventListener('DOMContentLoaded', contadorDeAnalises);
+    document.querySelector('.selecionar-pedido').addEventListener('click', selecionarPedidoHTML);
+    
+    function selecionarPedidoHTML() {
+      const auditor = document.querySelector('#auditores');
 
-      <button class='finalizar-modal'>Finalizar</button>
+      if (auditor.value) {
+        mostrarSpinner();
+        google.script.run
+        .withSuccessHandler(function() {          
+          alert('Pedido Selecionado');
+          contadorDeAnalises();
+          auditor.value = '';
+          buscarPedidos();          
+        })
+        .withFailureHandler(function(erro){
+          esconderSpinner();
+          alert('Falha ao Selecionar pedido:'+ erro);
+        })
+        .selecionarPedidoGS(auditor.value)
+      } else {
+        alert('Informe quem irá fazer a análise!')
+      }     
+    }
 
-    </div> 
+    function buscarPedidos() {
+      console.log("1. A função buscarPedidos FOI CHAMADA!");      
+      const tabela = document.querySelector('.container-tabela');
+      const modalConcluirPedido = document.querySelector('.container-informacoes-pedido');      
 
-    <script src="index.js"></script>
+      google.script.run
+      .withSuccessHandler(function (pedidosObjeto){
+        console.log("2. A função buscarPedidos FOI CHAMADA!", pedidosObjeto);
+        console.log("3. A função buscarPedidos FOI CHAMADA!", tabela);
+        tabela.innerHTML = '';
+        pedidosObjeto.forEach( function (pedidos) {
+          const linhaPedido = document.createElement('tr');
+          const numeroPedido = document.createElement('td');
+          const nomeAuditor = document.createElement('td');
+          const linkEmail = document.createElement('td');
+          const linkPedido = document.createElement('td');
+          const botaoFinalizarTD = document.createElement('td');
+          const botaoFinalizar = document.createElement('button');
+          const botaoExcluirTD = document.createElement('td');
+          const botaoExcluir = document.createElement('button');
+
+          linkEmail.innerHTML = `<a href='https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/${pedidos.numero}' target='_blank'>Link do email</a>`
+          linkPedido.innerHTML = `<a href='https://manager.kabum.com.br/cgi-local/pedido/pedido.cgi?pedido=${pedidos.numero}' target='_blank'>Link do Pedido</a>`          
+          botaoFinalizar.className = 'botao-finalizar-pedido';
+          botaoFinalizar.textContent = '✅'
+          botaoFinalizar.value = 'V';
+          botaoFinalizarTD.appendChild(botaoFinalizar);
+          botaoExcluir.className = 'botao-excluir-pedido';
+          botaoExcluir.textContent = '🗑️'
+          botaoExcluir.value = 'X';
+          botaoFinalizarTD.appendChild(botaoFinalizar);
+          botaoExcluirTD.appendChild(botaoExcluir);
+          numeroPedido.textContent = pedidos.numero;
+          nomeAuditor.textContent = pedidos.auditor;          
+          linhaPedido.appendChild(linkEmail);
+          linhaPedido.appendChild(linkPedido);
+          linhaPedido.appendChild(numeroPedido);
+          linhaPedido.appendChild(nomeAuditor);
+          linhaPedido.appendChild(botaoFinalizarTD);
+          linhaPedido.appendChild(botaoExcluirTD);
+          tabela.appendChild(linhaPedido);         
+
+          botaoFinalizar.addEventListener('click', function() {
+            const numeroDoPedidoClicado = pedidos.numero;
+            modalConcluirPedido.dataset.pedidoId = numeroDoPedidoClicado;
+            modalConcluirPedido.style.display = 'block';                    
+          });    
+
+          botaoExcluir.addEventListener('click', function() {
+            const numeroDoPedido = pedidos.numero;
+            const mensagem = `Você tem certeza que deseja excluir o pedido ${numeroDoPedido}?
+            Irá apagar o pedido da planilha e não terá mais acesso a ele`;
+            console.log('clicou papai, o pedido eh' + numeroDoPedido);
+
+            if (confirm(mensagem)) {
+              mostrarSpinner();
+              google.script.run
+              .withSuccessHandler(function() {
+                console.log('deu certo');                                        
+                buscarPedidos();
+              })
+              .withFailureHandler(function(error) {
+                console.log('deu erro'+error);
+                esconderSpinner();
+              })
+              .excluirPedidoGS(numeroDoPedido)
+            } else {
+              console.log('Deu erro, pedido nao foi excluido')
+            }            
+          })             
+        })
+        esconderSpinner();
+      })
+      .pedidosEmAndamento();
+    }
+
+    function finalizarPedido() {
+      const modalFinalizarPedido = document.querySelector('.container-informacoes-pedido');
+      const conclusaoAnalise = document.querySelector('#conclusao-pedido');
+      const botaoFinalizar = document.querySelector('.finalizar-modal');
+
+      botaoFinalizar.addEventListener('click', function() {
+          const numeroDoPedido = modalFinalizarPedido.dataset.pedidoId;
+          const conclusao = conclusaoAnalise.value;
+          mostrarSpinner();
+
+          if (conclusao === 'Seguiu Devidamente') {
+              const seguiuDevidamente = document.querySelector('.container-seguiu-devidamente');
+              const valorInput = document.querySelector('#valor-sd');
+              const transportadoraInput = document.querySelector('#transportadora');
+              
+              const valor = valorInput.value;
+              const transportadora = transportadoraInput.value;
+
+              if (!valor || !transportadora) {
+                  alert('Por favor, preencha o Valor e a Transportadora.');
+                  return;
+              }
+
+              mostrarSpinner();
+              google.script.run
+                  .withSuccessHandler(function() {
+                      valorInput.value = '';
+                      transportadoraInput.value = '';
+                      conclusaoAnalise.value = '';
+                      seguiuDevidamente.style.display = 'none';
+                      buscarPedidos();
+                  })
+                  .withFailureHandler(function(erro) {
+                      esconderSpinner();
+                      console.log('Deu erro: ' + erro);
+                  })
+                  .finalizarPedidoSD(numeroDoPedido, conclusao, valor, transportadora);
+          
+          } else if (conclusao === 'Erro Operacional') {
+              const valorInput = document.querySelector('#valor-eo');
+              const setorInput = document.querySelector('#setor-ofensor-eo');
+              const erroInput = document.querySelector('#erro-cometido');
+              const colaboradorInput = document.querySelector('#nome-colaborador-eo');
+              const turnoInput = document.querySelector('#turno');
+              const erroOperacional = document.querySelector('.container-erro-operacional');
+
+              const valor = valorInput.value;
+              const setor = setorInput.value;
+              const erro = erroInput.value;
+              const colaborador = colaboradorInput.value;
+              const turno = turnoInput.value;
+
+              if (!valor || !setor || !erro || !colaborador || !turno) {
+                  alert('Por favor, preencha todos os campos de Erro Operacional.');
+                  return;
+              }
+
+              mostrarSpinner();
+              google.script.run
+                  .withSuccessHandler(function() {
+                      valorInput.value = '';
+                      setorInput.value = '';
+                      erroInput.value = '';
+                      colaboradorInput.value = '';
+                      turnoInput.value = '';
+                      conclusaoAnalise.value = '';
+                      erroOperacional.style.display = 'none';  
+                      buscarPedidos();
+                  })
+                  .withFailureHandler(function(erro) {
+                      esconderSpinner();
+                      console.log('Deu erro: ' + erro);
+                  })
+                  .finalizarPedidoEO(numeroDoPedido, conclusao, valor, setor, erro, colaborador, turno);
+          
+          } else if (conclusao === 'Ato Inseguro') {
+              const colaboradorInput = document.querySelector('#nome-colaborador-ai');
+              const setorInput = document.querySelector('#setor-ofensor-ai');
+              const atoInseguro = document.querySelector('.container-ato-inseguro');
+
+              const colaborador = colaboradorInput.value;
+              const setor = setorInput.value;
+
+              if (!setor || !colaborador) {
+                  alert('Por favor, preencha o Setor e o Colaborador.');
+                  return;
+              }
+
+              mostrarSpinner();
+              google.script.run
+                  .withSuccessHandler(function() {
+                      colaboradorInput.value = '';
+                      setorInput.value = '';
+                      conclusaoAnalise.value = '';
+                      atoInseguro.style.display = 'none';
+                      buscarPedidos();
+                  })
+                  .withFailureHandler(function(error) {
+                      esconderSpinner();
+                      console.log('Deu erro: ' + error);
+                  })
+                  .finalizarPedidoAI(numeroDoPedido, conclusao, setor, colaborador);
+
+          } else if (conclusao === 'Causa Indeterminada') {
+              const valorInput = document.querySelector('#valor-pedido-ci');
+              const causaIndeterminada = document.querySelector('.container-causa-indeterminada');
+              const valor = valorInput.value;
+
+              if (!valor) {
+                  alert('Por favor, preencha o Valor Contestado.');
+                  return;
+              }
+
+              mostrarSpinner();
+              google.script.run
+                  .withSuccessHandler(function() {
+                      valorInput.value = '';
+                      conclusaoAnalise.value = '';
+                      causaIndeterminada.style.display = 'none';
+                      buscarPedidos();
+                  })
+                  .withFailureHandler(function(erro) {
+                      esconderSpinner();
+                      console.log('Deu erro: ' + erro);
+                  })
+                  .finalizarPedidoCI(numeroDoPedido, conclusao, valor);
+
+          } else if (conclusao === 'Ato Indevido') {
+
+              const simOuNao = document.querySelector('#movimentacao');
+              const colaboradorInput = document.querySelector('.nomeIndevido');
+              const obsInput = document.querySelector('.observacao');
+              const colaborador = colaboradorInput.value;
+              const observacao = obsInput.value;              
+              const atoIndevido = document.querySelector('.container-ato-indevido');
+
+              if (simOuNao.value === 'Sim') {
+                google.script.run
+                .withSuccessHandler(function() {
+                  simOuNao.value = '';
+                  colaboradorInput.value = '';
+                  obsInput.value = '';
+                  conclusaoAnalise.value = '';
+                  atoIndevido.style.display = 'none';
+                  buscarPedidos();
+                })
+                .withFailureHandler(function(error) {
+                  esconderSpinner();
+                  console.log('Deu erro:'+error)
+                })
+                .finalizarPedidoAISim(numeroDoPedido, conclusao, colaborador, observacao)
+              } else if (simOuNao.value === 'Não') {
+                  google.script.run
+                  .withSuccessHandler(function() {
+                    simOuNao.value = '';
+                    conclusaoAnalise.value = '';
+                    atoIndevido.style.display = 'none';
+                    buscarPedidos();
+                  })
+                  .withFailureHandler(function(error) {
+                    esconderSpinner();
+                    console.log('Deu erro:'+error)  
+                  })
+                  .finalizarPedidoAINao(numeroDoPedido, conclusao)
+              }
+          }
+      }); 
+  }
+    buscarPedidos();
+    finalizarPedido();  
+  </script>
   </body>
 </html>
