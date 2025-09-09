@@ -1,5 +1,7 @@
 # Projeto CFTV - Sistema de Gestão de Análises
 
+![Google Apps Script](https://img.shields.io/badge/Google%20Apps%20Script-4285F4?style=for-the-badge&logo=google&logoColor=white) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+
 ## 📄 Sobre o Projeto
 
 O **Sistema de Gestão de Análises de CFTV** é uma aplicação web interna desenvolvida para otimizar o fluxo de trabalho da equipe de Prevenção de Perdas da KaBuM!. A ferramenta centraliza e organiza as solicitações de análise de pedidos, permitindo um controle eficiente desde a abertura do chamado até a sua conclusão.
